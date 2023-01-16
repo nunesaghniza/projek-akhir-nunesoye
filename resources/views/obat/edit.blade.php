@@ -5,35 +5,67 @@
         <h1 class="h3 mb-0 text-gray-800">Ubah Data Obat</h1>
     </div>
     <div class="col">
-        <form action="/obat/{{ $obat->id }}" method="post">
+        <form action="/obat/{{ $obat->kd_obat }}" method="post">
+            @method('put')
             @csrf
-            @method('PUT')
-            <div class="form-group col-5">
-                <label for="kd_obat">Kode Obat</label>
-                <input class="form-control" type="text" name="kd_obat" value="{{ $obat->kd_obat }}">
-            </div>
-            <div class="form-group col-5">
-                <label for="nama_obat">Nama Obat</label>
-                <input class="form-control" type="text" name="nama_obat" value="{{ $obat->nama_obat }}">
-            </div>
-            <div class="form-group col-5">
-                <label for="jenis_satuan">Jenis Satuan</label>
-                <select class="form-control" name="jenis_satuan" id="cars" value="{{ $obat->jenis_satuan }}">
-                    <option value="Tablet">Tablet</option>
-                    <option value="Kapsul">Kapsul</option>
-                    <option value="Ampul">Ampul</option>
-                    <option value="Botol">Botol</option>
-                    <option value="Tube">Tube</option>
-                    <option value="Pot">Pot</option>
-                    <option value="Vial">Vial</option>
-                </select>
-            </div>
-            <div style="display: flex;">
-                <div style="margin-top:20px;">
-                    <input class="btn btn-primary" type="submit" name="submit" value="Simpan">
+            <div class="container">
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label for="kd_obat">Kode Obat</label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control @error('kd_obat') is-invalid @enderror" type="text" name="kd_obat"
+                            value="{{ old('kd_obat', $obat->kd_obat) }}" disabled>
+                        @error('kd_obat')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                 </div>
-                <div style="margin: 20px 0px 0px 20px;">
-                    <a class="btn btn-danger" href="">Batal</a>
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label for="nama_obat">Nama Obat</label>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control @error('nama_obat') is-invalid @enderror" type="text" name="nama_obat"
+                            value="{{ old('nama_obat', $obat->nama_obat) }}">
+                        @error('nama_obat')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-2">
+                        <label for="jenis_satuan">Jenis Satuan</label>
+                    </div>
+                    <div class="col-6">
+                        <select class="form-control  @error('jenis_satuan') is-invalid @enderror"
+                            value="{{ old('jenis_satuan', $obat->jenis_satuan) }}" name="jenis_satuan" id="jenis_satuan">
+                            <option value="Tablet" {{ $obat->jenis_satuan === 'Tablet' ? 'Selected' : '' }}>Tablet</option>
+                            <option value="Kapsul" {{ $obat->jenis_satuan === 'Kapsul' ? 'Selected' : '' }}>Kapsul</option>
+                            <option value="Ampul" {{ $obat->jenis_satuan === 'Ampul' ? 'Selected' : '' }}>Ampul</option>
+                            <option value="Botol" {{ $obat->jenis_satuan === 'Botol' ? 'Selected' : '' }}>Botol</option>
+                            <option value="Tube" {{ $obat->jenis_satuan === 'Tube' ? 'Selected' : '' }}>Tube</option>
+                            <option value="Pot" {{ $obat->jenis_satuan === 'Pot' ? 'Selected' : '' }}>Pot</option>
+                            <option value="Vial" {{ $obat->jenis_satuan === 'Vial' ? 'Selected' : '' }}>Vial</option>
+                        </select>
+                        @error('jenis_satuan')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-8">
+                        <div class="text-right">
+                            <input class="btn btn-success" type="submit" name="submit" value="Update">
+                            <a class="btn btn-danger" href="{{ url()->previous() }}">Batal</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

@@ -3,9 +3,10 @@
 
 <head>
     @include('template/head')
+    @yield('css')
 </head>
 
-<body id="page-top">
+<body id="page-top" class="choosen-family">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -69,6 +70,7 @@
     </div>
 
     @include('template/script')
+    @yield('js')
 
 </body>
 

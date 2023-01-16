@@ -14,10 +14,9 @@ class Obat extends Migration
     public function up()
     {
         Schema::create('obat', function (Blueprint $table) {
-            $table->id();
-            $table->string('kd_obat');
+            $table->string('kd_obat', 3)->unique()->primary();
             $table->string('nama_obat');
-            $table->string('jenis_satuan');
+            $table->string('jenis_satuan', 20);
             $table->integer('user_id');
             $table->timestamps();
         });

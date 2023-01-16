@@ -15,9 +15,9 @@ class Aktual extends Migration
     {
         Schema::create('aktual', function (Blueprint $table) {
             $table->id();
-            $table->string('kd_obat');
+            $table->string('kd_obat', 3);
             $table->string('bln_thn');
-            $table->string('d_aktual');
+            $table->integer('d_aktual');
             $table->integer('user_id');
             $table->timestamps();
         });
